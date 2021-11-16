@@ -33,11 +33,11 @@ Link jurnal terkait :
     <p align=justify>Model based melibatkan machine learning dalam menganalisa data dan pembuatan rekomendasi. Metode ini bekerja dengan mengekstrak kumpulan data lalu membuat model probabilitas untuk menghasilkan rekomendasi. Dengan metode ini, kita dapat membuat rekomendasi untuk pengguna baru karena pengguna baru tidak akan mengubah model yang sudah ada. Metode model based ini dibagi 2 yaitu matrix factorization dan deep learning.</p>
 
 ## Data Understanding
-<p align=justify>Dataset yang diambil berasal dari Kaggle. Dataset tersebut berisi data-data tentang buku. Dataset ini dibagi menjadi 3 file csv yang berbeda yaitu books.csv, ratings.csv, dan users.csv. Secara rinci, data-data pada book dataset adalah sebagai berikut:</p>
+<p align=justify>Dataset yang diambil berasal dari Kaggle. Dataset tersebut dikumpulkan oleh Cai-Nicolas Ziegler dalam 4 minggu (August/September 2004) dari Book-Crossing community atas izin dari Ron Hornbaker (CTO dari Humankind Systems). Dataset ini dibagi menjadi 3 file csv yang berbeda yaitu books.csv, ratings.csv, dan users.csv. Secara rinci, data-data pada book dataset tersebut adalah sebagai berikut:</p>
 
 1. File books.csv
 
-    Pada data buku ini disediakan berbagai informasi seperti berikut :
+    Pada data buku ini terdapat 271360 baris data yang masing-masing memiliki informasi seperti berikut :
     - ISBN yang berisi kode ISBN atau ID dari suatu buku.
     - Title yang berisi judul buku.
     - Author yang berisi penulis atau pengarang buku.
@@ -47,19 +47,31 @@ Link jurnal terkait :
     - Image-URL-M yang berisi link gambar berukuran sedang dari buku tersebut.
     - Image-URL-L yang berisi link gambar berukuran besar dari buku tersebut.
     
+    Informasi selengkapnya mengenai data buku dapat dilihat pada gambar berikut :
+    
+    [![bookinfo.png](https://i.postimg.cc/B6mDPScT/bookinfo.png)](https://postimg.cc/5YFjZMry)
+    
 2. File ratings.csv 
 
-    Pada data rating ini disediakan berbagai informasi seperti berikut :
+    Pada data rating ini terdapat 1149780 baris data yang masing-masing memiliki informasi seperti berikut :
     - UserID yang berisi ID user yang memberikan rating pada buku.
     - ISBN yang berisi ISBN dari buku yang diberikan rating.
     - Book-Rating yang berisi nilai rating yang diberikan oleh pengguna pada buku tersebut.
     
+    Informasi selengkapnya mengenai data rating dapat dilihat pada gambar berikut :
+    
+    [![ratinginfo.png](https://i.postimg.cc/zGYLBHYm/ratinginfo.png)](https://postimg.cc/fJ5WqLb5)
+    
 3. File users.csv
 
-    Pada data user ini disediakan berbagai informasi seperti berikut :
+    Pada data user ini terdapat 278858 baris data yang masing-masing memiliki informasi seperti berikut :
     - UserID yang berisi ID dari user.
     - Location yang berisi informasi lokasi dari user.
     - Age yang berisi informasi umur dari user.
+    
+    Informasi selengkapnya mengenai data user dapat dilihat pada gambar berikut :
+    
+    [![userinfo.png](https://i.postimg.cc/2SY4tK6B/userinfo.png)](https://postimg.cc/mtdzzV7b)
 
 Untuk menelaah lebih lanjut informasi dari data-data tersebut, maka dibuatlah visualisasi data sebagai berikut :
 
