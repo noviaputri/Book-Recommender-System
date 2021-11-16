@@ -191,6 +191,10 @@ Hasil evaluasi pada sistem rekomendasi buku dengan metode collaborative based fi
 <p align=justify>Pada grafik tersebut dapat diketahui bahwa proses training model cukup smooth dan model ditraining sebanyak 100 epochs. Dari proses tersebut, diperoleh nilai error akhir sebesar sekitar 0.02 dan error pada data validasi sebesar 0.36. Nilai tersebut dapat dikatakan cukup bagus untuk sistem rekomendasi.</p>
 
 ***Referensi***
-- Dokumentasi RMSE : https://towardsdatascience.com/evaluating-recommender-systems-root-means-squared-error-or-mean-absolute-error-1744abc2beac dan https://www.statisticshowto.com/probability-and-statistics/regression-analysis/rmse-root-mean-square-error/
-- Content and Collaborative FIltering : https://www.dicoding.com/academies/319/tutorials/19657
+- Dokumentasi RMSE : 
+   1. [Towardsdatascience](https://towardsdatascience.com/evaluating-recommender-systems-root-means-squared-error-or-mean-absolute-error-1744abc2beac) 
+   2. [Statisticshowto](https://www.statisticshowto.com/probability-and-statistics/regression-analysis/rmse-root-mean-square-error/)
+- Content and Collaborative FIltering : 
+   1. [Dicoding Academy](https://www.dicoding.com/academies/319/tutorials/19657) 
+   2. [Jurnal Unikom](https://elib.unikom.ac.id/files/disk1/747/jbptunikompp-gdl-rendinusap-37304-7-unikom_r-i.pdf)
 
