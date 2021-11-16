@@ -1,6 +1,6 @@
 # Book Recommender System
 
-## Domain Proyek
+## Project Overview
 <p align=justify>Pada proyek ini mengambil permasalahan tentang sistem rekomendasi. Sistem rekomendasi merupakan suatu aplikasi untuk menyediakan dan merekomendasikan suatu item dalam membuat suatu keputusan yang diinginkan oleh pengguna (Ungkawa, et al., 2013). Topik yang diambil yaitu sistem rekomendasi pada buku. Pada dasarnya di suatu perpustakaan atau tempat jual buku memang disediakan fitur pencarian buku, tetapi fitur tersebut mungkin hanya sebatas mencari berdasarkan judul, pengarang, atau tahun terbit. Dengan begitu akan memunculkan banyak buku berdasarkan pencarian tersebut, sehingga membuat pengguna/pencari bingung serta membutuhkan waktu yang lama dalam menentukan pilihan buku apa yang sesuai dengan kebutuhannya. Untuk itulah dibuat sistem rekomendasi buku untuk menyediakan pilihan buku berdasarkan keinginan atau kebutuhan pengguna. Sistem rekomendasi ini akan lebih mengefektifkan proses pencarian buku serta efisien dari segi waktu karena nantinya buku yang akan direkomendasikan tidak sebanyak dengan fitur pencarian biasa sehingga dapat lebih menghemat waktu dalam proses pemilihannya.
 
 Link jurnal terkait : 
@@ -60,8 +60,28 @@ Link jurnal terkait :
     - UserID yang berisi ID dari user.
     - Location yang berisi informasi lokasi dari user.
     - Age yang berisi informasi umur dari user.
+
+Untuk menelaah lebih lanjut informasi dari data-data tersebut, maka dibuatlah visualisasi data sebagai berikut :
+
+- Membuat histogram pada data umur untuk melihat persebaran umur user
+
+	[![histo1.png](https://i.postimg.cc/L8C9jdKk/histo1.png)](https://postimg.cc/RWtxzD0q)
 	
-  [Link download dataset](https://www.kaggle.com/arashnic/book-recommendation-dataset?select=Books.csv "Dataset Kaggle")
+	<p align=justify>Pada histogram di atas dapat diketahui bahwa terdapat beberapa user yang memiliki data umur 0 tahun atau lebih dari 100 tahun. Dan rata-rata umur user paling banyak terdapat pada rentang 0-50 tahun.</p>
+	
+- Membuat pairplot untuk melihat hubungan antar fitur numerik pada data ratings
+
+	[![rating1.png](https://i.postimg.cc/wv5ncJRK/rating1.png)](https://postimg.cc/LYXymJVv)
+	
+	<p align=justify>Pada pairplot di atas dapat diketahui bahwa nilai rating yang diberikan oleh user bermacam macam, mulai dari 0 hingga 10 semuanya terdapat di dalam data rating. Lalu dapat diketahui juga bahwa rating yang paling banyak diberikan adalah rating 0.</p>
+	
+- Membuat pairplot untuk melihat hubungan antar fitur numerik pada data users
+
+	[![user.png](https://i.postimg.cc/y6PwDmzc/user.png)](https://postimg.cc/yWDf5Sx8)
+	
+	<p align=justify>Pada pairplot di atas dapat diketahui bahwa umur user memang sangat bervariasi tetapi yang paling banyak terletak pada rentang 0-100 tahun. Walaupun begitu ternyata juga ada user dengan umur 100 tahun ke atas.</p>
+	
+[Link download dataset](https://www.kaggle.com/arashnic/book-recommendation-dataset?select=Books.csv "Dataset Kaggle")
 
 ## Data Preparation
 Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
@@ -128,7 +148,7 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
     all_data['Age'] = all_data['Age'].astype(int)
   ```
 
-## Modeling
+## Modeling and Result
 <p align=justify>Untuk menyelesaikan permasalahan yang sudah dijelaskan di atas, pada proyek ini menggunakan 2 jenis metode untuk membuat sistem rekomendasi yaitu Content Based Filtering dan Collaborative Based Filtering. Kedua metode tersebut sama sama akan menghasilkan rekomendasi buku, hanya saja pada content based filtering akan merekomendasikan buku sesuai dengan kesamaan konten pada buku sedangkan pada collaborative based filtering akan merekomendasikan buku berdasarkan data komunitas pengguna. Hasil rekomendasi buku berdasarkan kedua metode tersebut dapat dilihat pada gambar berikut:</p>
 
 - Pada metode Content Based Filtering
@@ -142,6 +162,8 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
   Hasil pencarian rekomendasi buku dengan user id "243930"
   
   [![colab.png](https://i.postimg.cc/zfZgT1Fb/colab.png)](https://postimg.cc/759hydcw)
+
+<p align=justify>Baik content based filtering maupun collaborative filtering tentunya memiliki kekurangan dan kelebihan masing-masing. Salah satu kekurangan yang terdapat pada content based filtering yaitu hanya dapat digunakan untuk fitur yang sesuai serta barang yang di spesialisasi secara berlebihan. Sedangkan kekurangan yang terdapat pada collaborative filtering yaitu akan menghasilkan data yang kurang akurat ketika penilaian pada satu data terlalu sedikit dan akan menjadi salah persepsi.</p>
 
 ## Evaluation
 <p align=justify>Untuk mengukur kinerja metode collaborative based filtering, maka digunakanlah metrik evaluasi yaitu Root Mean Squared Error (MSE). Metrik ini adalah standar deviasi dari residual (kesalahan prediksi). Residual adalah ukuran seberapa jauh dari titik data garis regresi dan RMSE adalah ukuran seberapa menyebar residu ini. Hal ini dapat memberi tahu kita seberapa terkonsentrasi data di sekitar garis yang paling cocok. Metrik ini juga biasanya digunakan untuk mengevaluasi kinerja sistem rekomendasi. Salah satu kecenderungan Root Mean Squared Error adalah cenderung menghukum kesalahan besar secara tidak proporsional karena residual (kesalahan) dikuadratkan. Ini berarti RMSE lebih rentan terpengaruh oleh outlier atau prediksi buruk. Namun, jika istilah kesalahan mengikuti distribusi normal, T. Chai dan R. R. Draxler menunjukkan bahwa menggunakan RSME memungkinkan untuk merekonstruksi kumpulan kesalahan, dengan data yang cukup. Selain itu, RSME tidak menggunakan Nilai Absolut, yang jauh lebih nyaman secara matematis saat menghitung jarak, gradien, atau metrik lainnya. Itu sebabnya sebagian besar fungsi biaya dalam Machine Learning lebih memilih menggunakan sum of squared errors atau Root Mean Squared Error. Rumus dari RMSE dapatdilihat pada gambar berikut :</p>
@@ -161,6 +183,12 @@ model.compile(
     metrics=[tf.keras.metrics.RootMeanSquaredError()]
 )
 ```
+
+Hasil evaluasi pada sistem rekomendasi buku dengan metode collaborative based filtering dapat dilihat pada grafik berikut :
+
+[![metrics.png](https://i.postimg.cc/wTTNcpR3/metrics.png)](https://postimg.cc/WtCtTxnP)
+
+<p align=justify>Pada grafik tersebut dapat diketahui bahwa proses training model cukup smooth dan model ditraining sebanyak 100 epochs. Dari proses tersebut, diperoleh nilai error akhir sebesar sekitar 0.02 dan error pada data validasi sebesar 0.36. Nilai tersebut dapat dikatakan cukup bagus untuk sistem rekomendasi.</p>
 
 ***Referensi***
 - Dokumentasi RMSE : https://towardsdatascience.com/evaluating-recommender-systems-root-means-squared-error-or-mean-absolute-error-1744abc2beac dan https://www.statisticshowto.com/probability-and-statistics/regression-analysis/rmse-root-mean-square-error/
