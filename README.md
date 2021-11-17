@@ -114,6 +114,10 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
   all_data.loc[(all_data['Year-Of-Publication'] > 2004) | (all_data['Year-Of-Publication'] == 0), 'Year-Of-Publication'] = np.nan
   all_data = all_data.dropna()
   ```
+  
+  Hasil data unik pada tahun publikasi yang sudah diproses cleaning dapat dilihat pada gambar di bawah ini :
+  
+  [![tahunclean.png](https://i.postimg.cc/50fw98F4/tahunclean.png)](https://postimg.cc/3ybyn4BV)
  
 - Mengatasi missing value
 
@@ -139,6 +143,10 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
   ```python
     all_data = all_data.dropna()
   ```
+  
+  Hasil nilai unik pada umur setelah dilakukan proses cleaning yaitu dapat dilihat pada gambar di bawah ini :
+  
+  [![umurclean.png](https://i.postimg.cc/wMTc2D6f/umurclean.png)](https://postimg.cc/DJHXyJ4L)
 
 - Mengubah tipe data yang tidak sesuai
 
@@ -171,16 +179,21 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
   
 - Pada metode Collaborative Based Filtering
 
-  <p align=justify>Pada metode ini dilakukan pemodelan dengan membuat satu fungsi yang berisi 3 parameter yaitu num_users (jumlah user), num_book (jumlah buku), dan embedding_size. Proses compile menggunakan binary crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Hasil pencarian rekomendasi buku dengan user id "243930" :</p>
+  <p align=justify>Pada metode ini dilakukan pemodelan dengan membuat satu fungsi yang berisi 3 parameter yaitu num_users (jumlah user), num_book (jumlah buku), dan embedding_size. Proses compile menggunakan binary crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Hasil pencarian rekomendasi buku dengan user id "27617" :</p>
   
-  [![colab.png](https://i.postimg.cc/zfZgT1Fb/colab.png)](https://postimg.cc/759hydcw)
+  [![colabhasil.png](https://i.postimg.cc/Xv3HRGxW/colabhasil.png)](https://postimg.cc/K1qDLYdp)
 
 <p align=justify>Baik content based filtering maupun collaborative filtering tentunya memiliki kekurangan dan kelebihan masing-masing. Salah satu kekurangan yang terdapat pada content based filtering yaitu hanya dapat digunakan untuk fitur yang sesuai serta barang yang di spesialisasi secara berlebihan. Sedangkan kekurangan yang terdapat pada collaborative filtering yaitu akan menghasilkan data yang kurang akurat ketika penilaian pada satu data terlalu sedikit dan akan menjadi salah persepsi.</p>
 
 ## Evaluation
 
 - Content Based Filtering
-	<p align=justify>Untuk mengukur kinerja metode content based filtering dilakukan dengan menghitung presisi secara manual yaitu dengan membagi jumlah buku relevan yang direkomendasikan dengan jumlah rekomendasi keseluruhan.
+	<p align=justify>Untuk mengukur kinerja metode content based filtering dilakukan dengan menghitung presisi secara manual yaitu dengan membagi jumlah buku relevan yang direkomendasikan dengan jumlah rekomendasi keseluruhan. Maka untuk menghitung nilai presisi pada metode content based filtering dapat dilakukan dengan melihat hasil rekomendasi pada gambar yang sudah ditunjukkan sebelumnya. Pada gambar tersebut terdapat 5 hasil rekomendasi untuk buku berjudul "Horrible Harry and the Green Slime" dengan author "Suzy Kline". Lalu dicocokkan dengan hasil rekomendasinya dengan melihat pada nama author dan ternyata nama author yang serupa juga terdapat pada kelima buku yang direkomendasikan sehingga langsung saja untuk menghitung nilai presisinya dapat menggunakan program sebagai berikut :
+	
+	```python
+	nilai_presisi = 5/5
+	```
+	Sehingga berdasarkan hasil tersebut dapat diketahui bahwa nilai presisi dari metode content based filtering adalah 1.
 	
 - Collaborative Based Filtering
 	<p align=justify>Untuk mengukur kinerja metode collaborative based filtering, maka digunakanlah metrik evaluasi yaitu Root Mean Squared Error (MSE). Metrik ini adalah standar deviasi dari residual (kesalahan prediksi). Residual adalah ukuran seberapa jauh dari titik data garis regresi dan RMSE adalah ukuran seberapa menyebar residu ini. Hal ini dapat memberi tahu kita seberapa terkonsentrasi data di sekitar garis yang paling cocok. Metrik ini juga biasanya digunakan untuk mengevaluasi kinerja sistem rekomendasi. Salah satu kecenderungan Root Mean Squared Error adalah cenderung menghukum kesalahan besar secara tidak proporsional karena residual (kesalahan) dikuadratkan. Ini berarti RMSE lebih rentan terpengaruh oleh outlier atau prediksi buruk. Namun, jika istilah kesalahan mengikuti distribusi normal, T. Chai dan R. R. Draxler menunjukkan bahwa menggunakan RSME memungkinkan untuk merekonstruksi kumpulan kesalahan, dengan data yang cukup. Selain itu, RSME tidak menggunakan Nilai Absolut, yang jauh lebih nyaman secara matematis saat menghitung jarak, gradien, atau metrik lainnya. Itu sebabnya sebagian besar fungsi biaya dalam Machine Learning lebih memilih menggunakan sum of squared errors atau Root Mean Squared Error. Rumus dari RMSE dapatdilihat pada gambar berikut :</p>
