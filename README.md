@@ -17,20 +17,10 @@ Link jurnal terkait :
 <p align=justify>Berdasarkan permasalahan yang ada di atas, maka solusi yang akan ditawarkan yaitu membuat sistem rekomendasi buku dengan efisien dan akurat menggunakan 2 metode yaitu :</p>
 
 - Content Based Filtering
-	<p align=justify>Content based filtering adalah sistem rekomendasi yang akan merekomendasikan buku yang mirip dengan buku yang dibaca oleh pembaca di masa lalu. Contoh dari sistem rekomendasi ini yaitu jika pembaca menyukai buku Dilan 1990 karya Pidi Baiq maka sistem akan merekomendasikan buku karya Pidi Baiq lainnya atau buku dengan genre yang sama dengan Dilan 1990. Sistem rekomendasi ini akan semakin akurat, jika data yang diberikan semakin banyak.</p>
+	<p align=justify>Content based filtering adalah sistem rekomendasi yang nantinya akan merekomendasikan buku yang mirip dengan buku yang dibaca oleh pembaca di masa lalu. Contoh dari sistem rekomendasi ini yaitu jika pembaca menyukai buku Dilan 1990 karya Pidi Baiq maka sistem akan merekomendasikan buku karya Pidi Baiq lainnya. Sistem rekomendasi ini akan semakin akurat, jika data yang diberikan semakin banyak. Pada metode ini nantinya menggunakan TF-IDF Vectorizer untuk menemukan representasi fitur penting dari setiap author buku dan menggunakan cosine similarity untuk menghitung derajat kesamaan (similarity degree) antar buku.</p>
   
 - Collaborative Based Filtering
-	<p align=justify>Collaborative filtering adalah sistem rekomendasi yang didasarkan oleh pendapat komunitas pengguna. Sehingga sistem ini tidak seperti content based filtering yang berdasarkan informasi dari buku, tetapi dilihat dari informasi pengguna lainnya. Collaborative filtering dibagi menjadi dua bagian yaitu : </p>
-  
-  - Memory Based (metode berbasis memori)
-    1. User Based
-        <p align=justify>Sistem rekomendasi ini merekomendasikan item berdasarkan kesamaan pengguna. Contohnya jika Sinta dan Rara memberikan rating yang tinggi terhadap buku bergenre fiksi, lalu Sinta menyukai buku The Lord of the Rings maka kemungkinan besar Rara juga akan menyukai buku tersebut.</p>
-    2. Item Based
-        <p align=justify>Sistem rekomendasi ini merekomendasikan item berdasarkan kesamaan antar item. Contohnya jika Sinta dan Rara menyukai buku The Lord of the Rings dan House of Glass, lalu Tita ternyata menyukai buku House of Glass maka sistem akan merekomendasikan buku The Lord of the Rings kepada Tita karena dianggap mirip dengan buku yang Tita sukai.</p>
-      
-  - Model Based (metode berbasis model machine learning)
-  
-    <p align=justify>Model based melibatkan machine learning dalam menganalisa data dan pembuatan rekomendasi. Metode ini bekerja dengan mengekstrak kumpulan data lalu membuat model probabilitas untuk menghasilkan rekomendasi. Dengan metode ini, kita dapat membuat rekomendasi untuk pengguna baru karena pengguna baru tidak akan mengubah model yang sudah ada. Metode model based ini dibagi 2 yaitu matrix factorization dan deep learning.</p>
+	<p align=justify>Collaborative filtering adalah sistem rekomendasi yang didasarkan oleh pendapat komunitas pengguna. Sehingga sistem ini tidak seperti content based filtering yang berdasarkan informasi dari buku saja, tetapi dilihat dari informasi pengguna lainnya. Metode ini nantinya menghasilkan rekomendasi sejumlah buku yang sesuai dengan preferensi pengguna berdasarkan rating yang telah diberikan sebelumnya. Dari data rating pengguna, selanjutnya akan mengidentifikasi buku-buku yang mirip dan belum pernah dibaca oleh pengguna untuk direkomendasikan.
 
 ## Data Understanding
 <p align=justify>Dataset yang diambil berasal dari Kaggle. Dataset tersebut dikumpulkan oleh Cai-Nicolas Ziegler dalam 4 minggu (August/September 2004) dari Book-Crossing community atas izin dari Ron Hornbaker (CTO dari Humankind Systems). Dataset ini dibagi menjadi 3 file csv yang berbeda yaitu books.csv, ratings.csv, dan users.csv. Secara rinci, data-data pada book dataset tersebut adalah sebagai berikut:</p>
@@ -79,7 +69,7 @@ Untuk menelaah lebih lanjut informasi dari data-data tersebut, maka dibuatlah vi
 
 	[![histo1.png](https://i.postimg.cc/L8C9jdKk/histo1.png)](https://postimg.cc/RWtxzD0q)
 	
-	<p align=justify>Pada histogram di atas dapat diketahui bahwa terdapat beberapa user yang memiliki data umur 0 tahun atau lebih dari 100 tahun. Dan rata-rata umur user paling banyak terdapat pada rentang 0-50 tahun.</p>
+	<p align=justify>Pada histogram di atas dapat diketahui bahwa terdapat beberapa user yang memiliki data umur 0 tahun atau lebih dari 100 tahun. Dan rata-rata umur user paling banyak terdapat pada rentang 0-50 tahun. Untuk mengatasi hal tersebut maka selanjutnya data akan dilakukan proses cleaning yang akan dilakukan pada tahap data preparation.</p>
 	
 - Membuat pairplot untuk melihat hubungan antar fitur numerik pada data ratings
 
@@ -160,47 +150,61 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
     all_data['Age'] = all_data['Age'].astype(int)
   ```
 
+- Normalisasi nilai rating
+	<p align=justify>Teknik ini dilakukan agar nilai pada variabel rating tidak memiliki rentang nilai yang terlalu jauh. Hal ini membantu untuk membuat fitur data menjadi bentuk yang lebih mudah diolah oleh algoritma. Data dengan skala relatif sama atau mendekati distribusi normal akan lebih mudah serta memiliki performa yang lebih baik untuk dimodelkan. Teknik normalisasi data yang digunakan adalah min max scaler yang bekerja dengan cara mengurangi nilai fitur dengan nilai minimum fitur tersebut, kemudian dibagi dengan rentang nilai fitur tersebut atau nilai maksimum dikurangi nilai minimum dari fitur. Normalisasi nilai rating dilakukan dengan code program sebagai berikut :</p>
+	
+  ```python
+     y = df['Book-Rating'].apply(lambda x: (x - min_rating) / (max_rating - min_rating)).values
+  ```
+
+- Train test split
+	<p align=justify>Proses selanjutnya pada data preparation yaitu train test split. Proses ini dilakukan dengan tujuan membagi data latih dan data uji sesuai dengan porsi yang diinginkan. Hal ini dilakukan agar nantinya tidak mengotori data uji dengan informasi yang kita dapat dari data latih karena data uji akan berperan sebagai data baru. Pada proyek ini train test split dibagi dengan rasio 80:20, dimana 80% dari keseluruhan data berperan sebagai data latih dan 20% sisanya berperan sebagai data uji.</p>
+
 ## Modeling and Result
 <p align=justify>Untuk menyelesaikan permasalahan yang sudah dijelaskan di atas, pada proyek ini menggunakan 2 jenis metode untuk membuat sistem rekomendasi yaitu Content Based Filtering dan Collaborative Based Filtering. Kedua metode tersebut sama sama akan menghasilkan rekomendasi buku, hanya saja pada content based filtering akan merekomendasikan buku sesuai dengan kesamaan konten pada buku sedangkan pada collaborative based filtering akan merekomendasikan buku berdasarkan data komunitas pengguna. Hasil rekomendasi buku berdasarkan kedua metode tersebut dapat dilihat pada gambar berikut:</p>
 
 - Pada metode Content Based Filtering
 
-  Hasil pencarian rekomendasi buku dengan judul "Horrible Harry and the Green Slime" dan author "Suzy Kline"
+  <p align=justify>Pada metode ini dilakukan pemodelan dengan membuat satu fungsi yang berisi 4 parameter yaitu nama_book, similarity_data, items, dan k. Parameter nama_book bertipe data string yang akan diisikan dengan judul buku, lalu parameter similarity_data yang berisi kesamaan antara buku satu dengan yang lainnya berdasarkan judul buku. Parameter items berisi judul buku dan author yang digunakan untuk mendefinisikan kemiripan, lalu yang terakhir parameter k yang bertipe data integer untuk mendefinisikan banyaknya jumlah buku yang akan direkomendasikan. Hasil pencarian rekomendasi buku dengan judul "Horrible Harry and the Green Slime" dan author "Suzy Kline" : </p>
   
   [![Content.png](https://i.postimg.cc/85LfZXwK/Content.png)](https://postimg.cc/phXdTZwz)
   
 - Pada metode Collaborative Based Filtering
 
-  Hasil pencarian rekomendasi buku dengan user id "243930"
+  <p align=justify>Pada metode ini dilakukan pemodelan dengan membuat satu fungsi yang berisi 3 parameter yaitu num_users (jumlah user), num_book (jumlah buku), dan embedding_size. Proses compile menggunakan binary crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Hasil pencarian rekomendasi buku dengan user id "243930" :</p>
   
   [![colab.png](https://i.postimg.cc/zfZgT1Fb/colab.png)](https://postimg.cc/759hydcw)
 
 <p align=justify>Baik content based filtering maupun collaborative filtering tentunya memiliki kekurangan dan kelebihan masing-masing. Salah satu kekurangan yang terdapat pada content based filtering yaitu hanya dapat digunakan untuk fitur yang sesuai serta barang yang di spesialisasi secara berlebihan. Sedangkan kekurangan yang terdapat pada collaborative filtering yaitu akan menghasilkan data yang kurang akurat ketika penilaian pada satu data terlalu sedikit dan akan menjadi salah persepsi.</p>
 
 ## Evaluation
-<p align=justify>Untuk mengukur kinerja metode collaborative based filtering, maka digunakanlah metrik evaluasi yaitu Root Mean Squared Error (MSE). Metrik ini adalah standar deviasi dari residual (kesalahan prediksi). Residual adalah ukuran seberapa jauh dari titik data garis regresi dan RMSE adalah ukuran seberapa menyebar residu ini. Hal ini dapat memberi tahu kita seberapa terkonsentrasi data di sekitar garis yang paling cocok. Metrik ini juga biasanya digunakan untuk mengevaluasi kinerja sistem rekomendasi. Salah satu kecenderungan Root Mean Squared Error adalah cenderung menghukum kesalahan besar secara tidak proporsional karena residual (kesalahan) dikuadratkan. Ini berarti RMSE lebih rentan terpengaruh oleh outlier atau prediksi buruk. Namun, jika istilah kesalahan mengikuti distribusi normal, T. Chai dan R. R. Draxler menunjukkan bahwa menggunakan RSME memungkinkan untuk merekonstruksi kumpulan kesalahan, dengan data yang cukup. Selain itu, RSME tidak menggunakan Nilai Absolut, yang jauh lebih nyaman secara matematis saat menghitung jarak, gradien, atau metrik lainnya. Itu sebabnya sebagian besar fungsi biaya dalam Machine Learning lebih memilih menggunakan sum of squared errors atau Root Mean Squared Error. Rumus dari RMSE dapatdilihat pada gambar berikut :</p>
 
-[![rmse.png](https://i.postimg.cc/6q0kfwZ9/rmse.png)](https://postimg.cc/JHsYRfKg)
+- Content Based Filtering
+	<p align=justify>Untuk mengukur kinerja metode content based filtering dilakukan dengan menghitung presisi secara manual yaitu dengan membagi jumlah buku relevan yang direkomendasikan dengan jumlah rekomendasi keseluruhan.
+	
+- Collaborative Based Filtering
+	<p align=justify>Untuk mengukur kinerja metode collaborative based filtering, maka digunakanlah metrik evaluasi yaitu Root Mean Squared Error (MSE). Metrik ini adalah standar deviasi dari residual (kesalahan prediksi). Residual adalah ukuran seberapa jauh dari titik data garis regresi dan RMSE adalah ukuran seberapa menyebar residu ini. Hal ini dapat memberi tahu kita seberapa terkonsentrasi data di sekitar garis yang paling cocok. Metrik ini juga biasanya digunakan untuk mengevaluasi kinerja sistem rekomendasi. Salah satu kecenderungan Root Mean Squared Error adalah cenderung menghukum kesalahan besar secara tidak proporsional karena residual (kesalahan) dikuadratkan. Ini berarti RMSE lebih rentan terpengaruh oleh outlier atau prediksi buruk. Namun, jika istilah kesalahan mengikuti distribusi normal, T. Chai dan R. R. Draxler menunjukkan bahwa menggunakan RSME memungkinkan untuk merekonstruksi kumpulan kesalahan, dengan data yang cukup. Selain itu, RSME tidak menggunakan Nilai Absolut, yang jauh lebih nyaman secara matematis saat menghitung jarak, gradien, atau metrik lainnya. Itu sebabnya sebagian besar fungsi biaya dalam Machine Learning lebih memilih menggunakan sum of squared errors atau Root Mean Squared Error. Rumus dari RMSE dapatdilihat pada gambar berikut :</p>
 
-Keterangan:
-<br>f = forecasts (nilai yang diharapkan atau hasil yang tidak diketahui)
-<br>o = observed values (hasil yang diketahui)
+	[![rmse.png](https://i.postimg.cc/6q0kfwZ9/rmse.png)](https://postimg.cc/JHsYRfKg)
 
-Cara mengimplementasikan RMSE pada program yaitu menggunakan kode program sebagai berikut :
+	Keterangan:
+	<br>f = forecasts (nilai yang diharapkan atau hasil yang tidak diketahui)
+	<br>o = observed values (hasil yang diketahui)
 
-```python
-model.compile(
-    loss = tf.keras.losses.BinaryCrossentropy(),
-    optimizer = keras.optimizers.Adam(learning_rate=0.001),
-    metrics=[tf.keras.metrics.RootMeanSquaredError()]
-)
-```
+	Cara mengimplementasikan RMSE pada program yaitu menggunakan kode program sebagai berikut :
 
-Hasil evaluasi pada sistem rekomendasi buku dengan metode collaborative based filtering dapat dilihat pada grafik berikut :
+	```python
+	model.compile(
+    		loss = tf.keras.losses.BinaryCrossentropy(),
+    		optimizer = keras.optimizers.Adam(learning_rate=0.001),
+    		metrics=[tf.keras.metrics.RootMeanSquaredError()])
+	```
 
-[![metrics.png](https://i.postimg.cc/wTTNcpR3/metrics.png)](https://postimg.cc/WtCtTxnP)
+	Hasil evaluasi pada sistem rekomendasi buku dengan metode collaborative based filtering dapat dilihat pada grafik berikut :
 
-<p align=justify>Pada grafik tersebut dapat diketahui bahwa proses training model cukup smooth dan model ditraining sebanyak 100 epochs. Dari proses tersebut, diperoleh nilai error akhir sebesar sekitar 0.02 dan error pada data validasi sebesar 0.36. Nilai tersebut dapat dikatakan cukup bagus untuk sistem rekomendasi.</p>
+	[![metrics.png](https://i.postimg.cc/wTTNcpR3/metrics.png)](https://postimg.cc/WtCtTxnP)
+
+	<p align=justify>Pada grafik tersebut dapat diketahui bahwa proses training model cukup smooth dan model ditraining sebanyak 100 epochs. Dari proses tersebut, diperoleh nilai error akhir sebesar sekitar 0.02 dan error pada data validasi sebesar 0.36. Nilai tersebut dapat dikatakan cukup bagus untuk sistem rekomendasi.</p>
 
 ***Referensi***
 - Dokumentasi RMSE : 
