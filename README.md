@@ -9,10 +9,10 @@ Link jurnal terkait :
 ## Business Understanding
 ### Problem Statements
 - Bagaimana cara membuat sistem rekomendasi buku berdasarkan data yang sudah ada?
-- Fitur apa yang paling mempengaruhi dari sistem rekomendasi buku?
+- Apakah metode yang diujikan dapat merekomendasikan buku dengan baik?
 ### Goals
 - Mampu membuat sistem rekomendasi buku yang efisien dan akurat.
-- Dapat mengetahui fitur-fitur apa saja yang sangat mempengaruhi sistem rekomendasi buku.
+- Dapat mengetahui seberapa baik metode yang digunakan dalam merekomendasikan buku.
 ### Solution statements
 <p align=justify>Berdasarkan permasalahan yang ada di atas, maka solusi yang akan ditawarkan yaitu membuat sistem rekomendasi buku dengan efisien dan akurat menggunakan 2 metode yaitu :</p>
 
@@ -71,17 +71,11 @@ Untuk menelaah lebih lanjut informasi dari data-data tersebut, maka dibuatlah vi
 	
 	<p align=justify>Pada histogram di atas dapat diketahui bahwa terdapat beberapa user yang memiliki data umur 0 tahun atau lebih dari 100 tahun. Dan rata-rata umur user paling banyak terdapat pada rentang 0-50 tahun. Untuk mengatasi hal tersebut maka selanjutnya data akan dilakukan proses cleaning yang akan dilakukan pada tahap data preparation.</p>
 	
-- Membuat pairplot untuk melihat hubungan antar fitur numerik pada data ratings
+- Membuat histogram pada data rating untuk melihat persebaran banyaknya masing-masing rating yang diberikan oleh user
 
-	[![rating1.png](https://i.postimg.cc/wv5ncJRK/rating1.png)](https://postimg.cc/LYXymJVv)
+	[![historating.png](https://i.postimg.cc/fLYDbQsh/historating.png)](https://postimg.cc/HcWfSKjS)
 	
-	<p align=justify>Pada pairplot di atas dapat diketahui bahwa nilai rating yang diberikan oleh user bermacam macam, mulai dari 0 hingga 10 semuanya terdapat di dalam data rating. Lalu dapat diketahui juga bahwa rating yang paling banyak diberikan adalah rating 0.</p>
-	
-- Membuat pairplot untuk melihat hubungan antar fitur numerik pada data users
-
-	[![user.png](https://i.postimg.cc/y6PwDmzc/user.png)](https://postimg.cc/yWDf5Sx8)
-	
-	<p align=justify>Pada pairplot di atas dapat diketahui bahwa umur user memang sangat bervariasi tetapi yang paling banyak terletak pada rentang 0-100 tahun. Walaupun begitu ternyata juga ada user dengan umur 100 tahun ke atas.</p>
+	<p align=justify>Pada histogram di atas dapat diketahui bahwa nilai rating yang diberikan oleh user bermacam macam, mulai dari 0 hingga 10 semuanya terdapat di dalam data rating. Lalu dapat diketahui juga bahwa rating yang paling banyak diberikan adalah rating 0.</p>
 	
 [Link download dataset](https://www.kaggle.com/arashnic/book-recommendation-dataset?select=Books.csv "Dataset Kaggle")
 
@@ -179,9 +173,9 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
   
 - Pada metode Collaborative Based Filtering
 
-  <p align=justify>Pada metode ini dilakukan pemodelan dengan membuat satu fungsi yang berisi 3 parameter yaitu num_users (jumlah user), num_book (jumlah buku), dan embedding_size. Proses compile menggunakan binary crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Hasil pencarian rekomendasi buku dengan user id "27617" :</p>
+  <p align=justify>Pada metode ini dilakukan pemodelan dengan membuat satu fungsi yang berisi 3 parameter yaitu num_users (jumlah user), num_book (jumlah buku), dan embedding_size. Proses compile menggunakan binary crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Hasil pencarian rekomendasi buku dengan user id "123625" :</p>
   
-  [![colabhasil.png](https://i.postimg.cc/Xv3HRGxW/colabhasil.png)](https://postimg.cc/K1qDLYdp)
+  [![hasill.png](https://i.postimg.cc/zXGZsgyN/hasill.png)](https://postimg.cc/MXNFRX03)
 
 <p align=justify>Baik content based filtering maupun collaborative filtering tentunya memiliki kekurangan dan kelebihan masing-masing. Salah satu kekurangan yang terdapat pada content based filtering yaitu hanya dapat digunakan untuk fitur yang sesuai serta barang yang di spesialisasi secara berlebihan. Sedangkan kekurangan yang terdapat pada collaborative filtering yaitu akan menghasilkan data yang kurang akurat ketika penilaian pada satu data terlalu sedikit dan akan menjadi salah persepsi.</p>
 
