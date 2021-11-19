@@ -1,10 +1,12 @@
 # Book Recommender System
 
 ## Project Overview
-<p align=justify>Pada proyek ini mengambil permasalahan tentang sistem rekomendasi. Sistem rekomendasi merupakan suatu aplikasi untuk menyediakan dan merekomendasikan suatu item dalam membuat suatu keputusan yang diinginkan oleh pengguna (Ungkawa, et al., 2013). Topik yang diambil yaitu sistem rekomendasi pada buku. Pada dasarnya di suatu perpustakaan atau tempat jual buku memang disediakan fitur pencarian buku, tetapi fitur tersebut mungkin hanya sebatas mencari berdasarkan judul, pengarang, atau tahun terbit. Dengan begitu akan memunculkan banyak buku berdasarkan pencarian tersebut, sehingga membuat pengguna/pencari bingung serta membutuhkan waktu yang lama dalam menentukan pilihan buku apa yang sesuai dengan kebutuhannya. Untuk itulah dibuat sistem rekomendasi buku untuk menyediakan pilihan buku berdasarkan keinginan atau kebutuhan pengguna. Sistem rekomendasi ini akan lebih mengefektifkan proses pencarian buku serta efisien dari segi waktu karena nantinya buku yang akan direkomendasikan tidak sebanyak dengan fitur pencarian biasa sehingga dapat lebih menghemat waktu dalam proses pemilihannya.
+<p align=justify>Pada proyek ini mengambil permasalahan tentang sistem rekomendasi. Sistem rekomendasi merupakan suatu aplikasi untuk menyediakan dan merekomendasikan suatu item dalam membuat suatu keputusan yang diinginkan oleh pengguna (Ungkawa, et al., 2013). Topik yang diambil yaitu sistem rekomendasi pada buku.</p>
+	
+<p align=justify>Pada dasarnya di suatu perpustakaan atau tempat jual buku memang disediakan fitur pencarian buku, tetapi fitur tersebut mungkin hanya sebatas mencari berdasarkan judul, pengarang, atau tahun terbit. Dengan begitu akan memunculkan banyak buku berdasarkan pencarian tersebut, sehingga membuat pengguna/pencari bingung serta membutuhkan waktu yang lama dalam menentukan pilihan buku apa yang sesuai dengan kebutuhannya. Untuk itulah dibuat sistem rekomendasi buku untuk menyediakan pilihan buku berdasarkan keinginan atau kebutuhan pengguna. Sistem rekomendasi ini akan lebih mengefektifkan proses pencarian buku serta efisien dari segi waktu karena nantinya buku yang akan direkomendasikan tidak sebanyak dengan fitur pencarian biasa sehingga dapat lebih menghemat waktu dalam proses pemilihannya.</p>
 
 Link jurnal terkait : 
-[Referensi 1](https://iopscience.iop.org/article/10.1088/1742-6596/1477/3/032024/meta "Referensi 1") dan [Referensi 2](http://e-journal.uajy.ac.id/8852/4/3TF06448.pdf "Referensi 2")
+[Book Recommendation System Development Using User-Based Collaborative Filtering](https://iopscience.iop.org/article/10.1088/1742-6596/1477/3/032024/meta "Referensi 1") dan [Sistem Rekomendasi Landasan Teori](http://e-journal.uajy.ac.id/8852/4/3TF06448.pdf "Referensi 2")
   
 ## Business Understanding
 ### Problem Statements
@@ -163,7 +165,7 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
 	<p align=justify>Proses selanjutnya pada data preparation yaitu train test split. Proses ini dilakukan dengan tujuan membagi data latih dan data uji sesuai dengan porsi yang diinginkan. Hal ini dilakukan agar nantinya tidak mengotori data uji dengan informasi yang kita dapat dari data latih karena data uji akan berperan sebagai data baru. Pada proyek ini train test split dibagi dengan rasio 80:20, dimana 80% dari keseluruhan data berperan sebagai data latih dan 20% sisanya berperan sebagai data uji.</p>
 
 ## Modeling and Result
-<p align=justify>Untuk menyelesaikan permasalahan yang sudah dijelaskan di atas, pada proyek ini menggunakan 2 jenis metode untuk membuat sistem rekomendasi yaitu Content Based Filtering dan Collaborative Based Filtering. Kedua metode tersebut sama sama akan menghasilkan rekomendasi buku, hanya saja pada content based filtering akan merekomendasikan buku sesuai dengan kesamaan konten pada buku sedangkan pada collaborative based filtering akan merekomendasikan buku berdasarkan data komunitas pengguna. Hasil rekomendasi buku berdasarkan kedua metode tersebut dapat dilihat pada gambar berikut:</p>
+<p align=justify>Untuk menyelesaikan permasalahan yang sudah dijelaskan di atas, pada proyek ini menggunakan 2 jenis metode untuk membuat sistem rekomendasi yaitu Content Based Filtering dan Collaborative Based Filtering. Kedua metode tersebut sama sama akan menghasilkan rekomendasi buku, hanya saja pada content based filtering akan merekomendasikan buku sesuai dengan kesamaan konten pada buku sedangkan pada collaborative based filtering akan merekomendasikan buku berdasarkan data komunitas pengguna. Hasil rekomendasi buku berdasarkan kedua metode tersebut dapat dilihat pada penjelasan berikut:</p>
 
 - Pada metode Content Based Filtering
 
@@ -177,12 +179,22 @@ Pada tahap data preparation ini dibagi menjadi 3 tahap pengerjaan yaitu :
   
   [![hasill.png](https://i.postimg.cc/zXGZsgyN/hasill.png)](https://postimg.cc/MXNFRX03)
 
-<p align=justify>Baik content based filtering maupun collaborative filtering tentunya memiliki kekurangan dan kelebihan masing-masing. Salah satu kekurangan yang terdapat pada content based filtering yaitu hanya dapat digunakan untuk fitur yang sesuai serta barang yang di spesialisasi secara berlebihan. Sedangkan kekurangan yang terdapat pada collaborative filtering yaitu akan menghasilkan data yang kurang akurat ketika penilaian pada satu data terlalu sedikit dan akan menjadi salah persepsi.</p>
+<p align=justify>Baik content based filtering maupun collaborative filtering tentunya memiliki kekurangan dan kelebihan masing-masing. Content based filtering memiliki kelebihan yaitu mampu merekomendasikan buku yang benar-benar baru bagi user karena metode ini bekerja dengan melihat konten dari buku dan juga pada metode ini tidak perlu menunggu pengguna lain untuk memberikan rating terlebih dahulu pada buku yang akan direkomendasikan. Sedangkan kekurangan yang terdapat pada content based filtering yaitu hanya dapat digunakan untuk fitur yang sesuai serta barang yang di spesialisasi secara berlebihan.</p>
+
+<p align=justify>Lalu untuk collaborative filtering memiliki kelebihan yaitu metode ini masih bisa bekerja walaupun konten yang berhubungan dengan buku yang akan direkomendasikan hanya sedikit atau pun tidak ada sama sekali. Sedangkan kekurangan yang terdapat pada collaborative filtering yaitu akan menghasilkan data yang kurang akurat ketika penilaian pada satu data terlalu sedikit dan akan menjadi salah persepsi.</p>
 
 ## Evaluation
 
 - Content Based Filtering
-	<p align=justify>Untuk mengukur kinerja metode content based filtering dilakukan dengan menghitung presisi secara manual yaitu dengan membagi jumlah buku relevan yang direkomendasikan dengan jumlah rekomendasi keseluruhan. Maka untuk menghitung nilai presisi pada metode content based filtering dapat dilakukan dengan melihat hasil rekomendasi pada gambar yang sudah ditunjukkan sebelumnya. Pada gambar tersebut terdapat 5 hasil rekomendasi untuk buku berjudul "Horrible Harry and the Green Slime" dengan author "Suzy Kline". Lalu dicocokkan dengan hasil rekomendasinya dengan melihat pada nama author dan ternyata nama author yang serupa juga terdapat pada kelima buku yang direkomendasikan sehingga langsung saja untuk menghitung nilai presisinya dapat menggunakan program sebagai berikut :
+	<p align=justify>Untuk mengukur kinerja metode content based filtering dilakukan dengan menghitung presisi secara manual yaitu dengan membagi jumlah buku relevan yang direkomendasikan dengan jumlah rekomendasi keseluruhan. Maka untuk menghitung nilai presisi pada metode content based filtering dapat dilakukan dengan melihat hasil rekomendasi pada gambar di bawah ini :</p>
+	
+	[![Content.png](https://i.postimg.cc/85LfZXwK/Content.png)](https://postimg.cc/phXdTZwz)
+	
+	<p align=justify>Pada gambar di atas terdapat 5 hasil rekomendasi untuk buku berjudul "Horrible Harry and the Green Slime" dengan author "Suzy Kline". Lalu dicocokkan dengan hasil rekomendasinya dengan melihat pada nama author dan ternyata nama author yang serupa juga terdapat pada kelima buku yang direkomendasikan sehingga langsung saja untuk menghitung nilai presisinya dapat menggunakan rumus berikut :</p>
+	
+	[![rumusrecommender.png](https://i.postimg.cc/nrHpzD5p/rumusrecommender.png)](https://postimg.cc/2bXP9VrK)
+	
+	Dan program berikut :
 	
 	```python
 	nilai_presisi = 5/5
